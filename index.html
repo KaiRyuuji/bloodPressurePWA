@@ -1,0 +1,55 @@
+<!-- Created by Imran Ghani
+    Feb 15 2022-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blood Pressure Calculator</title>
+    <meta charset="utf-8"> 
+  <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0, maximum-scale=1.0-ui"/>  
+  <meta name="theme-color" content="#317EFB">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="/icons/icon-128.png">
+  <link rel="stylesheet" href="bloodPressure.css">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+    <div id='container'>
+        <h1>Calculate Your Blood Pressure</h1>
+    <p>Your blood pressure is extremely vital to maintain in your health and living a long life. If you have high blood pressure, it increases the risk of diabetes, heart attacks, strokes, and even death. Calculate your blood pressure by entering your age below:</p>
+    
+    <p id='in' style="width:50%;margin:auto">Enter Your age <input type='number' id='number' name='number' style="text-align: center"></p>
+    
+    <p>Your blood pressure is: <span id='span'>xx</span> Hg</p>
+    </div>
+    
+    <script>
+    
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+        console.log('Successfully registered');
+    }).catch(err => {
+        console.log('Error while registering SW')
+    });
+}
+    
+    var age;
+    var heartrate;
+    window.onload = start();
+        function start(){
+        document.querySelector('#number').addEventListener('input',calc,false);
+        }
+    function calc(){
+        age=document.querySelector('#number').value;
+        bloodPressure = 100 + age * .5;
+        document.querySelector('span').textContent=bloodPressure;
+        document.querySelector('span').style.color="red";
+        document.querySelector('span').style.fontSize="xx-large";
+    }
+    </script>
+    
+
+</body>
+</html>
